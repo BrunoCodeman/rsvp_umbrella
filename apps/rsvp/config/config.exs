@@ -33,5 +33,5 @@ config :rsvp, Rsvp.Repo,
         database: "rsvp",
         username: "root",
         password: "root",
-        hostname: "172.17.0.3"
+        hostname: "172.17.0.2"
 config :rsvp, ecto_repos: [Rsvp.Repo]

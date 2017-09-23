@@ -7,13 +7,16 @@ defmodule Rsvp.EventQueries do
     end
 
     def get_all_from_location(location) do
-        query from e in Events
-              where e.location == ^location
-    
+        query = from e in Events,
+              where: e.location == ^location
         Repo.all(query)
     end
 
     def get_by_id(id) do
         Repo.get(Events, id)
+    end
+
+    def create(event) do
+        Repo.insert! event
     end
 end
