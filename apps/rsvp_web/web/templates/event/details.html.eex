@@ -1,0 +1,4 @@
+<h1> <%=@event.title%> </h1> 
+<h3> <%= format_date @event.date %> </h3>
+<span> <%=@event.description%>  </span>
+
