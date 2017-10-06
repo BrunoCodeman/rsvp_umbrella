@@ -11,7 +11,8 @@ defmodule Rsvp.Mixfile do
       lockfile: "../../mix.lock",
       elixir: "~> 1.5",
       start_permanent: Mix.env == :prod,
-      deps: deps()
+      deps: deps(),
+      aliases: aliases()
     ]
   end
 
@@ -19,7 +20,7 @@ defmodule Rsvp.Mixfile do
   def application do
     [
       extra_applications: [:logger, :postgrex, :ecto],
-      mod: {Rsvp.Application, []}
+      mod: {Rsvp, []}
     ]
   end
 
@@ -31,6 +32,11 @@ defmodule Rsvp.Mixfile do
       # {:dep_from_hexpm, "~> 0.3.0"},
       # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"},
       # {:sibling_app_in_umbrella, in_umbrella: true},
+    ]
+  end
+  defp aliases do
+    [
+      "init": [ "ecto.create", "ecto.migrate", "run priv/repo/seed.exs" ]
     ]
   end
 end
