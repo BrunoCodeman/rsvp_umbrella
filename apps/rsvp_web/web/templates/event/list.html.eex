@@ -1,0 +1,12 @@
+<h1>Events</h1>
+<div class="list-group">
+<%=for e <- @events do %>
+<a href="events/<%= e.id%>">
+<h3> <%= e.title %> </h3> 
+</a>
+<h2> <%= format_date e.date %> </h2>
+<span> <%= e.description %>  </span>
+
+
+<% end %>
+</div>
