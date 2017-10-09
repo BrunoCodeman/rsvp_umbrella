@@ -1,8 +1,7 @@
 <div class="list-group-item">
-    <a href="events/<%= @event.id%>">
+    <a href="<%= event_path(@conn, :show, @event.id) %>">
         <h3 class="list-group-item-heading"> <%= @event.title %> </h3> 
     </a>
     <span class="pull-left"> <%= format_date @event.date %> </span> <br/>
-    <span class="text-muted"> <%= @event.description %>  </span>
 </div>
 
