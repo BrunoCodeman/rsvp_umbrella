@@ -23,7 +23,7 @@ defmodule RsvpWeb.Mixfile do
   def application do
     [
       mod: {RsvpWeb, []},
-      extra_applications: [:logger, :rsvp]
+      extra_applications: [:logger,:phoenix_ecto, :rsvp]
     ]
   end
 
@@ -40,6 +40,7 @@ defmodule RsvpWeb.Mixfile do
       {:phoenix_pubsub, "~> 1.0"},
       {:phoenix_html, "~> 2.10"},
       {:phoenix_live_reload, "~> 1.0", only: :dev},
+      {:phoenix_ecto, "~> 3.0"},
       {:gettext, "~> 0.11"},
       {:cowboy, "~> 1.0"},
       {:rsvp, in_umbrella: true}
