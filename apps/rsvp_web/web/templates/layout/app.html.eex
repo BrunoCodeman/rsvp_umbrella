@@ -7,20 +7,26 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Hello RsvpWeb!</title>
+    <title>Event Maker</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
   </head>
 
   <body>
+  <ul class="nav nav-pills col-xs-offset-7" role="tablist">
+    <li><a href="/"> Home </a></li>
+    <li><a href="<%=event_path(@conn, :list)%>"> Events </a></li>
+    <li><a href="<%=login_path(@conn, :index)%>"> Login </a></li>
+  </ul>
+
     <div class="container">
-      <header class="header">
-        <nav role="navigation">
-          <ul class="nav nav-pills pull-right">
-            <li><a href="http://www.phoenixframework.org/docs">Get Started</a></li>
-          </ul>
-        </nav>
-        <span class="logo"></span>
-      </header>
+      <div class="page-header text-center">
+        <h1>RSVP <br /> <small>Your online directory of events</small></h1>
+        <%= if @conn.cookies["user_name"] do %>
+          <br /><span>
+            Hello, <%= @conn.cookies["user_name"] %>
+          </span>
+        <% end %>
+      </div>
 
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
