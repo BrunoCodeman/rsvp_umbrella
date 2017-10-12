@@ -24,4 +24,11 @@ defmodule Rsvp.EventQueries do
     def create(event) do
         Repo.insert(event)
     end
+
+    def decrease_quantity(id, quantity) do
+        event = Repo.get!(Events, id)
+        quantity_available = event.quantity_available - String.to_integer(quantity)
+        changes = Ecto.Changeset.change event, quantity_available: quantity_available
+        Repo.update changes
+    end
 end

@@ -1,8 +1,23 @@
 <div class="list-group-item">
-    <a href="events/<%= @event.id%>">
+    <a href="events/<%= @event.id %>">
         <h3 class="list-group-item-heading"> <%= @event.title %> </h3> 
     </a>
     <span class="pull-left"> <%= format_date @event.date %> </span> <br/>
     <span class="text-muted"> <%= @event.description %>  </span>
 </div>
+<h4>
+    Available spots: 
+    <span class="quantity">
+        <%= @event.quantity_available %>
+    </span>
+</h4>
 
+<%= form_for @conn, event_path(@conn, :reserve, @event.id), [as: :reservation, 
+class: "form-inline"], fn f -> %>
+    <div class="form-group">
+        <%= label f, :quantity, "Quantity" %>
+        <%= number_input f, :quantity, class: "form-control", min: 1 %>
+    </div>
+    <%= submit "Reserve", class: "btn btn-primary pull-right" %>
+<% end %>
+<input type="hidden" value="<%= @event.id %>" id="id">

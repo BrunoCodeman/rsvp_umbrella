@@ -9,9 +9,9 @@ defmodule RsvpWeb.EventController do
         render conn, "details.html", event: event
     end
 
-    def list(_conn, _params) do
+    def list(conn, _params) do
         events = Rsvp.EventQueries.get_all
-        render(_conn, "list.html", events: events)
+        render(conn, "list.html", events: events)
     end
 
     def create(conn, %{errors: errors} ) do
@@ -26,10 +26,17 @@ defmodule RsvpWeb.EventController do
     def add(conn, %{"events" => events}) do
         events = Map.update!(events, "date", fn d -> d <> ":00Z" end )
         changeset = Rsvp.Events.changeset(%Rsvp.Events{}, events)
+        
         case Rsvp.EventQueries.create(changeset) do
             {:ok, %{id: id}} -> redirect conn, to: event_path(conn, :show, id)
             {:error, reasons} -> create conn, %{errors: reasons}
         end
         
+    end
+
+    def reserve(conn, %{"id" => id, "reservation" => %{"quantity" => quantity}}) do
+        { :ok, event } = Rsvp.EventQueries.decrease_quantity(id, quantity)
+        RsvpWeb.EventChannel.send_update(event)
+        redirect conn, to: event_path(conn, :show, id)
     end
 end
